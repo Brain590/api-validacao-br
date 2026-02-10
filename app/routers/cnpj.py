@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from app.services.cnpj_service import validar_cnpj
 from app.core.rapidapi_auth import rapidapi_auth
 
