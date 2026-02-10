@@ -5,6 +5,12 @@
         "description": "Professional API for validating and generating Brazilian documents (CPF/CNPJ) and looking up addresses via CEP.",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "https://api-validacao-br.onrender.com",
+            "description": "Production server on Render"
+        }
+    ],
     "paths": {
         "/cpf/validate": {
             "get": {
