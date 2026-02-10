@@ -1,0 +1,158 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Brazilian Data Validation API",
+        "description": "Professional API for validating and generating Brazilian documents (CPF/CNPJ) and looking up addresses via CEP.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/cpf/validate": {
+            "get": {
+                "tags": [
+                    "Validation"
+                ],
+                "summary": "Validate CPF",
+                "description": "Performs syntactic validation of a CPF number.",
+                "parameters": [
+                    {
+                        "name": "cpf",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "12345678909"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Validation result"
+                    }
+                }
+            }
+        },
+        "/cnpj/validate": {
+            "get": {
+                "tags": [
+                    "Validation"
+                ],
+                "summary": "Validate CNPJ",
+                "description": "Performs syntactic validation of a CNPJ number.",
+                "parameters": [
+                    {
+                        "name": "cnpj",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "12345678000195"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Validation result"
+                    }
+                }
+            }
+        },
+        "/cep/lookup": {
+            "get": {
+                "tags": [
+                    "CEP"
+                ],
+                "summary": "Lookup CEP",
+                "description": "Returns address information for a given Brazilian ZIP code.",
+                "parameters": [
+                    {
+                        "name": "cep",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "01001000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Address data"
+                    },
+                    "404": {
+                        "description": "CEP not found"
+                    }
+                }
+            }
+        },
+        "/tools/generate/cpf": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Generate CPF",
+                "description": "Generates a mathematically valid CPF for testing purposes.",
+                "parameters": [
+                    {
+                        "name": "formatted",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Generated CPF"
+                    }
+                }
+            }
+        },
+        "/tools/generate/cnpj": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Generate CNPJ",
+                "description": "Generates a mathematically valid CNPJ for testing purposes.",
+                "parameters": [
+                    {
+                        "name": "formatted",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Generated CNPJ"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "X-RapidAPI-Key": {
+                "type": "apiKey",
+                "name": "X-RapidAPI-Key",
+                "in": "header"
+            },
+            "X-RapidAPI-Host": {
+                "type": "apiKey",
+                "name": "X-RapidAPI-Host",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "X-RapidAPI-Key": [],
+            "X-RapidAPI-Host": []
+        }
+    ]
+}

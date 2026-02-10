@@ -6,10 +6,18 @@ router = APIRouter(prefix="/cep", tags=["CEP"], dependencies=[Depends(rapidapi_a
 
 @router.get("/lookup")
 def lookup(cep: str):
-    r = consultar_cep(cep)
-    if not r:
+    try:
+        r = consultar_cep(cep)
+        if not r:
+            raise HTTPException(
+                status_code=404,
+                detail={"success": False, "error": "CEP_NOT_FOUND"}
+            )
+        return {"success": True, "data": r}
+    except HTTPException:
+        raise
+    except Exception as e:
         raise HTTPException(
-            status_code=404,
-            detail={"success": False, "error": "CEP_NOT_FOUND"}
+            status_code=502,
+            detail={"success": False, "error": "EXTERNAL_SERVICE_ERROR", "message": str(e)}
         )
-    return {"success": True, "data": r}
