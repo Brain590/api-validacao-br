@@ -1,6 +1,6 @@
 def validar_cnpj(cnpj: str) -> bool:
     cnpj = ''.join(filter(str.isdigit, cnpj))
-    if len(cnpj) != 14:
+    if len(cnpj) != 14 or cnpj == cnpj[0] * 14:
         return False
     pesos_1 = [5,4,3,2,9,8,7,6,5,4,3,2]
     pesos_2 = [6] + pesos_1

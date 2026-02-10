@@ -6,4 +6,10 @@ router = APIRouter(prefix="/cnpj", tags=["CNPJ"], dependencies=[Depends(rapidapi
 
 @router.get("/validate")
 def validate(cnpj: str):
-    return {"success": True, "cnpj": cnpj, "valid": validar_cnpj(cnpj)}
+    try:
+        return {"success": True, "cnpj": cnpj, "valid": validar_cnpj(cnpj)}
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail={"success": False, "error": "INTERNAL_SERVER_ERROR", "message": str(e)}
+        )
